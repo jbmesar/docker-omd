@@ -11,7 +11,10 @@ Usage
 
 To build image run:
 
-`docker build -t 'baulito/omd' .`
+```bash
+git clone https://github.com/baulito/docker-omd.git
+docker build -t 'baulito/omd' .
+```
 
 or get from docker registry
 
