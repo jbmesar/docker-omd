@@ -1,27 +1,23 @@
-# Open Monitoring Distribution
-#
-## VERSION	1.0
-FROM ubuntu
-MAINTAINER Johan Warlander, jwarlander@redbridge.se
+# Docker OMD 0.1
 
-# Make sure package repository is up to date
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
+FROM baulito/centos:7
+MAINTAINER Bau Mesa <jbmesar@gmail.com>
 
-# Install OMD
-RUN gpg --keyserver keys.gnupg.net --recv-keys F8C1CA08A57B9ED7
-RUN gpg --armor --export F8C1CA08A57B9ED7 | apt-key add -
-RUN echo "deb http://labs.consol.de/repo/stable/ubuntu precise main" >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y libpython2.7 omd
+# Adding epel repo
+RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+# Updating system
+RUN yum -y update
+# Installing OMD service
+RUN yum -y install http://files.omdistro.org/releases/centos_rhel/omd-1.20.rhel7.x86_64.rpm
 
 # Set up a default site
-RUN omd create default
+RUN omd create monitor
 # We don't want TMPFS as it requires higher privileges
 RUN omd config default set TMPFS off
 # Accept connections on any IP address, since we get a random one
 RUN omd config default set APACHE_TCP_ADDR 0.0.0.0
+# Configure port
+RUN omd config default set APACHE_TCP_PORT 5000
 
 # Add watchdog script
 ADD watchdog.sh /opt/omd/watchdog.sh
