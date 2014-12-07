@@ -10,14 +10,14 @@ RUN yum -y update
 # Installing OMD service
 RUN yum -y install http://files.omdistro.org/releases/centos_rhel/omd-1.20.rhel7.x86_64.rpm
 
-# Set up a default site
+# Set up a monitor site
 RUN omd create monitor
 # We don't want TMPFS as it requires higher privileges
-RUN omd config default set TMPFS off
+RUN omd config monitor set TMPFS off
 # Accept connections on any IP address, since we get a random one
-RUN omd config default set APACHE_TCP_ADDR 0.0.0.0
+RUN omd config monitor set APACHE_TCP_ADDR 0.0.0.0
 # Configure port
-RUN omd config default set APACHE_TCP_PORT 5000
+RUN omd config monitor set APACHE_TCP_PORT 5000
 
 # Add watchdog script
 ADD watchdog.sh /opt/omd/watchdog.sh
