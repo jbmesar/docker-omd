@@ -21,11 +21,9 @@ RUN omd config monitor set APACHE_TCP_ADDR 0.0.0.0
 # Configure port
 RUN omd config monitor set APACHE_TCP_PORT 5000
 
-# Add https proxy
-ADD monitor.conf /etc/httpd/conf.d/monitor.conf
 # Add watchdog script
 ADD watchdog.sh /opt/omd/watchdog.sh
 
 # Set up runtime options
-EXPOSE 443
+EXPOSE 5000
 ENTRYPOINT ["/opt/omd/watchdog.sh"]

@@ -5,7 +5,6 @@ Dockerfile for Open Monitoring Distribution
 
 - Forcked from [jwarlander/docker-omd] (https://github.com/jwarlander/docker-omd)
 - Adding support for Centos 7 and OMD 1.20
-- Adding https support
 
 Usage
 =====
@@ -22,10 +21,10 @@ or get from docker registry (comming soon...)
 
 To create the docker image run
 
-`docker run -d --name docker-omd -p [host_ip]:[host_port]:443 baulito/omd`
+`docker run -d --name docker-omd -p 5000 baulito/omd`
 
 Then connect your browser to:
 
-`https://[host_ip]:[host_port]/monitor`
+`http://[host_ip]:5000/monitor`
 
 Enjoy!
