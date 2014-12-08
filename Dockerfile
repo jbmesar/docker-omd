@@ -9,6 +9,8 @@ RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-
 RUN yum -y update
 # Installing OMD service
 RUN yum -y install http://files.omdistro.org/releases/centos_rhel/omd-1.20.rhel7.x86_64.rpm
+# Install additional packages
+RUN yum -y install which
 
 # Set up a monitor site
 RUN omd create monitor
@@ -19,6 +21,8 @@ RUN omd config monitor set APACHE_TCP_ADDR 0.0.0.0
 # Configure port
 RUN omd config monitor set APACHE_TCP_PORT 5000
 
+# Add https proxy
+ADD monitor.conf /etc/httpd/conf.d/monitor.conf
 # Add watchdog script
 ADD watchdog.sh /opt/omd/watchdog.sh
 
