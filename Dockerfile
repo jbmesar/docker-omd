@@ -27,5 +27,5 @@ ADD monitor.conf /etc/httpd/conf.d/monitor.conf
 ADD watchdog.sh /opt/omd/watchdog.sh
 
 # Set up runtime options
-EXPOSE 5000
+EXPOSE 443
 ENTRYPOINT ["/opt/omd/watchdog.sh"]
