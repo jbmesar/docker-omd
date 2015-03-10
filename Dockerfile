@@ -4,13 +4,13 @@ FROM baulito/centos:7
 MAINTAINER Bau Mesa <jbmesar@gmail.com>
 
 # Adding epel repo
-RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+RUN yum -y install epel-release.noarch
 # Updating system
 RUN yum -y update
+# Installing OMD Repository
+RUN yum -y install rpm -Uvh https://labs.consol.de/repo/stable/rhel7/i386/labs-consol-stable.rhel7.noarch.rpm
 # Installing OMD service
-RUN yum -y install http://files.omdistro.org/releases/centos_rhel/omd-1.20.rhel7.x86_64.rpm
-# Install additional packages
-RUN yum -y install which
+RUN yum -y install omd which
 
 # Set up a monitor site
 RUN omd create monitor

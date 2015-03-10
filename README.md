@@ -28,3 +28,8 @@ Then connect your browser to:
 `http://[host_ip]:5000/monitor`
 
 Enjoy!
+
+TODO
+====
+- Add https support
+- Add welcome page
